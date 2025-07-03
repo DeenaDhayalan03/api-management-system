@@ -1,11 +1,11 @@
 
-# API Usage Metering & Billing Platform
+# API Management & Usage Control Platform
 
 ## Problem Statement:
 
 As businesses increasingly rely on APIs to deliver services, manage integrations, and expose features to external developers or partners, it becomes essential to monitor and control how these APIs are being used. Without proper tracking, rate-limiting, and billing mechanisms, platforms risk system overload, unfair access to premium features, and significant revenue loss.
 
-### 🔎 Real-World Examples
+### Real-World Examples:
 
 - **GitHub** had to introduce stricter rate limits and personal access tokens after scraping bots started aggressively consuming API bandwidth from free-tier users.
 - **OpenAI** experienced performance degradation due to traffic surges from trial users, leading to stricter per-user and credit-based usage controls.
@@ -38,20 +38,20 @@ We are building a reusable, multi-tenant **API Usage Metering & Billing Platform
 
 ## Tech Stack & Purpose:
 
-| Tool             | Purpose                                                   |
-|------------------|-----------------------------------------------------------|
-| **FastAPI**       | For building the main API service                         |
-| **MongoDB**       | To store tenants, users, plans, and usage logs            |
-| **Redis**         | To handle rate limiting and login lockouts                |
-| **Celery**        | For background tasks like credit deduction                |
-| **Celery Beat**   | For scheduled jobs like monthly invoicing                 |
-| **EMQX (MQTT)**   | To stream API usage events in real time                   |
-| **JWT**           | For secure authentication and token management           |
-| **Casbin**        | For admin vs user access control                         |
-| **Sentry**        | For error monitoring and alerting                        |
-| **Infisical**     | For managing environment secrets securely                |
-| **SMTP**          | To send email alerts, warnings, and invoices              |
-| **Grafana (optional)** | For visualizing tenant usage dashboards         |
+| Tool             | Purpose                                       |
+|------------------|-----------------------------------------------|
+| **FastAPI**       | For building the main API service             |
+| **MongoDB**       | To store tenants, users, plans, and usage logs |
+| **Redis**         | To handle rate limiting and login lockouts    |
+| **Celery**        | For background tasks like credit deduction    |
+| **Celery Beat**   | For scheduled jobs like monthly invoicing     |
+| **EMQX (MQTT)**   | To stream API usage events in real time       |
+| **JWT**           | For secure authentication and token management |
+| **Casbin**        | For admin vs user access control              |
+| **Sentry**        | For error monitoring and alerting             |
+| **Infisical**     | For managing environment secrets securely     |
+| **SMTP**          | To send email alerts and warnings             |
+
 
 ---
 
@@ -64,11 +64,14 @@ We are building a reusable, multi-tenant **API Usage Metering & Billing Platform
 
 ## End-to-End Workflow with Any API Project
 
-### Step 1: Tenant Signs Up or Is Created
-- Admin creates a tenant account and assigns a plan (Free, Pro, Enterprise)
+### Step 1: User Signs Up (Tenant Onboarding)
+- A user (tenant) signs up through a public /auth/signup endpoint.
+- During sign-up:
+  - The user provides email, password, and basic details.
+  - By default, it is free plan but User can choose plan (Basic, Pro, etc.).
 
 Each plan defines:
-- Rate limits (e.g., 1000 requests/day)
+- Rate limits (e.g., 10 requests/day)
 - Credits per call
 - Access to premium features or endpoints
 
@@ -105,7 +108,7 @@ Each plan defines:
 ### Step 6: Admin Panel Usage
 - View usage logs and credit stats
 - Update plans, credits, or unlock tenants
-- Optional dashboards via Grafana
+
 
 ---
 
