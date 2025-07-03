@@ -59,7 +59,7 @@ We are building a reusable, multi-tenant **API Usage Metering & Billing Platform
 
 > _Architecture showing API client → Metering Platform → services (MongoDB, Redis, Celery, EMQX, SMTP, etc.)_
 
-![Architecture](./ams.png)
+![Architecture](./images/ams.png)
 ---
 
 ## End-to-End Workflow with Any API Project
